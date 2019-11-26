@@ -15,7 +15,7 @@ after_success:
   - docker build -t sandipamte/multi-worker ./worker
 
 #push this to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "#DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push sandipamte/multi-client
   - docker push sandipamte/multi-server
   - docker push sandipamte/multi-nginx
