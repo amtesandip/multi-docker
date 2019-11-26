@@ -1,37 +1,41 @@
 {
-	"AWSEBDockerrunVersion": 2,
-	"containerDefinations": [{
-			"name": "client",
-			"image": "sandipamte/multi-client",
-			"hostname": "client",
-			"essential": false,
-			"memory": 128
-		},
-		{
-			"name": "server",
-			"image": "sandipamte/multi-server",
-			"hostname": "api",
-			"essential": false,
-			"memory": 128
-		},
-		{
-			"name": "worker",
-			"image": "sandipamte/multi-worker",
-			"hostname": "worker",
-			"essential": false,
-			"memory": 128
-		},
-		{
-			"name": "nginx",
-			"image": "sandipamte/multi-nginx",
-			"hostname": "nginx",
-			"essential": true,
-			"memory": 128,
-			"portMappings": [{
-				"hostPort": 80,
-				"containerPort": 80
-			}],
-			"links": ["client", "server"]
-		}
-	]
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "stephengrider/multi-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "server",
+      "image": "stephengrider/multi-server",
+      "hostname": "api",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "worker",
+      "image": "stephengrider/multi-worker",
+      "hostname": "worker",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "stephengrider/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"],
+      "memory": 128
+    }
+  ]
 }
+
