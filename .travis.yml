@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sandipamte/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true sandipamte/react-test npm run test
+
+after_success:
+  - docker build -t sandipamte/multi-client ./client
+  - docker build -t sandipamte/multi-server ./server
+  - docker build -t sandipamte/multi-nginx ./nginx
+  - docker build -t sandipamte/multi-worker ./worker
+
+#push this to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "#DOCKER_ID" --password-stdin
+  - docker push sandipamte/multi-client
+  - docker push sandipamte/multi-server
+  - docker push sandipamte/multi-nginx
+  - docker push sandipamte/multi-worker
